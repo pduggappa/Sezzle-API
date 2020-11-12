@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a user connected');
+  io.emit('new calculation', calculator);
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
@@ -25,7 +26,7 @@ io.on('connection', (socket) => {
       io.emit('error',validation);
     }
   });
-  socket.on('clear calculation', () => {
+  socket.on('clear calculation',() => {
     calculator = [];
     io.emit('new calculation', calculator);
   });
